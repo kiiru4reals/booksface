@@ -1,4 +1,5 @@
 import 'package:booksface/screens/home_page.dart';
+import 'package:booksface/widgets/custom_tab_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 
@@ -32,7 +33,8 @@ class _NavigationScreenState extends State<NavigationScreen> {
     return DefaultTabController(
       length: _icons.length,
       child: Scaffold(
-        body: _screens[_selectedIndex],
+        body: IndexedStack(index: _selectedIndex,
+        children: _screens,),
         bottomNavigationBar: CustomTabBar(
           icons: _icons,
           selectedIndex: _selectedIndex,
