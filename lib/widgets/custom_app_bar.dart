@@ -1,7 +1,10 @@
 import 'package:booksface/consts/colors.dart';
 import 'package:booksface/models/user_model.dart';
+import 'package:booksface/widgets/circle_button.dart';
 import 'package:booksface/widgets/custom_tab_bar.dart';
+import 'package:booksface/widgets/user_card.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/font_awesome5_icons.dart';
 
 class CustomAppBar extends StatelessWidget {
   final User currentUser;
@@ -26,21 +29,36 @@ class CustomAppBar extends StatelessWidget {
           ),
         ]
       ),
-      child: Row(children: [
-        Text("BooksFace",style: TextStyle(
-          color: Palette.facebookBlue,
-          fontSize: 32,
-          fontWeight: FontWeight.bold,
-          letterSpacing: -1.2,
-        ),),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+        Expanded(
+          child: Text("BooksFace",style: TextStyle(
+            color: Palette.facebookBlue,
+            fontSize: 32,
+            fontWeight: FontWeight.bold,
+            letterSpacing: -1.2,
+          ),),
+        ),
         Container(
+          height: double.infinity,
           width: 600,
           child: CustomTabBar(
             icons: icons,
             selectedIndex: selectedIndex,
             onTap: onTap,
+            isBottomIndicator: true
           ),
-        )
+        ),
+          Expanded(child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              UserCard(user: currentUser),
+              SizedBox(width: 12,),
+              CircleButton(icon: Icons.search, iconSize: 30, onPressed: (){}),
+              CircleButton(icon: FontAwesome5.facebook_messenger, iconSize: 30, onPressed: (){}),
+            ],
+          ))
       ],),
     );
   }
